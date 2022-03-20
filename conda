@@ -1,7 +1,0 @@
-#!/bin/bash
-conda install -c bioconda fastqc --yes
-conda install -c bioconda trim-galore --yes
-conda install -c bioconda kallisto --yes
-conda install -c bioconda picard --yes
-
-conda remove r-base --force
