@@ -71,6 +71,16 @@ flatpak install com.bitwarden.desktop
 flatpak install com.mattjakeman.ExtensionManager
 
 #-------------------------
+# Install GH Desktop
+#-------------------------
+flatpak install flathub io.github.shiftey.Desktop
+
+#-------------------------
+# Install Thunderbird
+#-------------------------
+flatpak install flathub org.mozilla.Thunderbird
+
+#-------------------------
 # Install Gnome Boxes
 #-------------------------
 flatpak install org.gnome.Boxes
