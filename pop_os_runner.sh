@@ -1,9 +1,13 @@
 #!/bin/bash
 
-read -p "Your email address: " myEmailAddress
-read -p "Your GitHub username: " githubUserName
+echo "# # # # # # # # #"
+echo "# Github setup  #"
+echo "# # # # # # # # #"
+read -p "Email address: " myEmailAddress
+read -p "Github username: " githubUserName
+read -sp "Github token: " ghToken
 
-sudo add-apt-repository ppa:appimagelauncher-team/stable -y
+# sudo add-apt-repository ppa:appimagelauncher-team/stable -y
 
 # Adding VSCode repos
 wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
@@ -23,11 +27,21 @@ if [ -f "$SNAP_PREF" ]; then
 	sudo mv /etc/apt/preferences.d/nosnap.pref $HOME/Documents/nosnap.backup
 	sudo apt update
 fi
-# sudo apt install snapd
+
+# Check if flatpak is installed, if not install
+if ! [ -x "$(command -v flatpak)" ]; then
+	echo 'ERROR: Flatpak is not installed.' >&2
+	echo 'Installing Flatpak...'
+	sudo apt install flatpak
+	flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+	echo 'Flatpak is installed!'
+else
+	echo 'Flatpak is installed!' >&2
+fi
 
 # Install some softwares via apt
 sudo apt install git fonts-powerline wget curl lm-sensors -y
-sudo apt install appimagelauncher code vlc -y
+sudo apt install code vlc -y
 
 #-------------------------
 # Download YoutubeMusic Appimage
@@ -37,25 +51,33 @@ wget -O $HOME/Downloads/YTM.deb "https://github.com/th-ch/youtube-music/releases
 sudo dpkg -i $HOME/Downloads/YTM.deb
 
 #-------------------------
-# Download OnlyOffice Appimage
+# Install OnlyOffice
 #-------------------------
-wget https://download.onlyoffice.com/install/desktop/editors/linux/onlyoffice-desktopeditors_amd64.deb -O $HOME/Downloads/OnlyOfficeDE.deb
-sudo dpkg -i $HOME/Downloads/OnlyOfficeDE.deb
+flatpak install org.onlyoffice.desktopeditors
 
 #-------------------------
-# Download Joplin Appimage
+# Install Joplin
 #-------------------------
-RELEASE_VERSION_JOPLIN=$(wget -qO - "https://api.github.com/repos/laurent22/joplin/releases/latest" | grep -Po '"tag_name": ?"v\K.*?(?=")')
-wget -O $HOME/Downloads/Joplin.AppImage "https://github.com/laurent22/joplin/releases/download/v${RELEASE_VERSION_JOPLIN}/Joplin-${RELEASE_VERSION_JOPLIN}.AppImage"
-#wget -O $HOME/Downloads/joplin.png https://joplinapp.org/images/Icon512.png
-#mkdir -p $HOME/.local/share/icons/hicolor/512x512/apps
-#mv $HOME/Downloads/joplin.png $HOME/.local/share/icons/hicolor/512x512/apps/joplin.png
-#rm $HOME/Downloads/joplin.png
+flatpak install net.cozic.joplin_desktop
+
+#-------------------------
+# Install Bitwarden
+#-------------------------
+flatpak install com.bitwarden.desktop
+
+#-------------------------
+# Install Ext Manager
+#-------------------------
+flatpak install com.mattjakeman.ExtensionManager
+
+#-------------------------
+# Install Gnome Boxes
+#-------------------------
+flatpak install org.gnome.Boxes
 
 #-------------------------
 # Install auto-cpufreq
 #-------------------------
-# sudo snap install auto-cpufreq
 git clone https://github.com/AdnanHodzic/auto-cpufreq.git
 cd auto-cpufreq && sudo ./auto-cpufreq-installer
 
