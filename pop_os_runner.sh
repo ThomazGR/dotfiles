@@ -115,6 +115,11 @@ flatpak install flathub org.gimp.GIMP -y
 flatpak install flathub network.loki.Session -y
 
 #-------------------------
+# Install MEGASync
+#-------------------------
+flatpak install flathub nz.mega.MEGAsync -y
+
+#-------------------------
 # Install auto-cpufreq
 #-------------------------
 git clone https://github.com/AdnanHodzic/auto-cpufreq.git
