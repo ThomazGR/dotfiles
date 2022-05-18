@@ -10,13 +10,13 @@ read -sp "Github token: " ghToken
 # sudo add-apt-repository ppa:appimagelauncher-team/stable -y
 
 # Adding VSCode repos
-wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
-sudo install -o root -g root -m 644 packages.microsoft.gpg /etc/apt/trusted.gpg.d/
-sudo sh -c 'echo "deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'
-rm -f packages.microsoft.gpg
+# wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
+# sudo install -o root -g root -m 644 packages.microsoft.gpg /etc/apt/trusted.gpg.d/
+# sudo sh -c 'echo "deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'
+# rm -f packages.microsoft.gpg
 
 # VSCode needed
-sudo apt install apt-transport-https
+# sudo apt install apt-transport-https
 
 # Update and instal some needed packages
 sudo apt update && sudo apt upgrade -y
@@ -33,7 +33,7 @@ else
 fi
 
 # Install some softwares via apt
-sudo apt install git wget curl code fonts-powerline lm-sensors -y
+sudo apt install ca-certificates gnupg lsb-release firefox git wget curl fonts-powerline lm-sensors -y # code
 
 # Install GH CLI
 curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
@@ -53,6 +53,18 @@ sudo dpkg -i $HOME/Downloads/YTM.deb
 RELEASE_VERSION_MICRO=$(wget -qO - "https://api.github.com/repos/zyedidia/micro/releases/latest" | grep -Po '"tag_name": ?"v\K.*?(?=")')
 wget -O $HOME/Downloads/micro.deb "https://github.com/zyedidia/micro/releases/download/v${RELEASE_VERSION_MICRO}/micro-${RELEASE_VERSION_MICRO}-amd64.deb"
 sudo dpkg -i $HOME/Downloads/micro.deb
+
+#-------------------------
+# Install Docker + Docker compose
+#-------------------------
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+sudo apt update
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+sudo usermod -aG docker $USER
 
 #-------------------------
 # Install OnlyOffice
@@ -118,6 +130,11 @@ flatpak install flathub network.loki.Session -y
 # Install MEGASync
 #-------------------------
 flatpak install flathub nz.mega.MEGAsync -y
+
+#-------------------------
+# Install VSCodium
+#-------------------------
+flatpak install flathub com.vscodium.codium -y
 
 #-------------------------
 # Install auto-cpufreq
