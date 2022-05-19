@@ -137,6 +137,11 @@ flatpak install flathub nz.mega.MEGAsync -y
 flatpak install flathub com.vscodium.codium -y
 
 #-------------------------
+# Install Tutanota Desktop
+#-------------------------
+flatpak install flathub com.tutanota.Tutanota -y
+
+#-------------------------
 # Install auto-cpufreq
 #-------------------------
 git clone https://github.com/AdnanHodzic/auto-cpufreq.git
