@@ -10,13 +10,13 @@ read -sp "Github token: " ghToken
 sudo apt update && sudo apt upgrade -y
 
 # Adding VSCode repos
-wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
-sudo install -o root -g root -m 644 packages.microsoft.gpg /etc/apt/trusted.gpg.d/
-sudo sh -c 'echo "deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'
-rm -f packages.microsoft.gpg
+#wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
+#sudo install -o root -g root -m 644 packages.microsoft.gpg /etc/apt/trusted.gpg.d/
+#sudo sh -c 'echo "deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'
+#rm -f packages.microsoft.gpg
 
-sudo apt update
-sudo apt install apt-transport-https
+#sudo apt update
+#sudo apt install apt-transport-https
 
 # Check if flatpak is installed, if not install
 if ! [ -x "$(command -v flatpak)" ]; then
@@ -30,7 +30,7 @@ else
 fi
 
 # Install some softwares via apt
-sudo apt install ca-certificates gnupg lsb-release firefox git wget curl fonts-powerline lm-sensors code -y # code
+sudo apt install ca-certificates gnupg lsb-release firefox git wget curl fonts-powerline lm-sensors -y # code
 
 # Install GH CLI
 curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
