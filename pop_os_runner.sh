@@ -47,9 +47,9 @@ sudo dpkg -i $HOME/Downloads/YTM.deb
 #-------------------------
 # Download Micro editor
 #-------------------------
-RELEASE_VERSION_MICRO=$(wget -qO - "https://api.github.com/repos/zyedidia/micro/releases/latest" | grep -Po '"tag_name": ?"v\K.*?(?=")')
-wget -O $HOME/Downloads/micro.deb "https://github.com/zyedidia/micro/releases/download/v${RELEASE_VERSION_MICRO}/micro-${RELEASE_VERSION_MICRO}-amd64.deb"
-sudo dpkg -i $HOME/Downloads/micro.deb
+cd /usr/bin
+curl https://getmic.ro/r | sudo sh
+cd
 
 #-------------------------
 # Install Docker + Docker compose
