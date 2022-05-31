@@ -15,8 +15,6 @@ sudo apt update && sudo apt upgrade -y
 #sudo sh -c 'echo "deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'
 #rm -f packages.microsoft.gpg
 
-#sudo apt update
-#sudo apt install apt-transport-https
 
 # Check if flatpak is installed, if not install
 if ! [ -x "$(command -v flatpak)" ]; then
@@ -30,7 +28,8 @@ else
 fi
 
 # Install some softwares via apt
-sudo apt install ca-certificates gnupg lsb-release firefox git wget curl fonts-powerline lm-sensors -y # code
+sudo apt install apt-transport-https ca-certificates gnupg lsb-release fonts-powerline lm-sensors
+sudo apt install gnome-tweaks firefox git wget curl -y # code
 
 # Install GH CLI
 curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
@@ -94,19 +93,9 @@ flatpak install flathub io.github.shiftey.Desktop -y
 flatpak install flathub org.mozilla.Thunderbird -y
 
 #-------------------------
-# Install Gnome Boxes
-#-------------------------
-# flatpak install flathub org.gnome.Boxes -y
-
-#-------------------------
 # Install Jitsi Meet
 #-------------------------
 flatpak install flathub org.jitsi.jitsi-meet -y
-
-#-------------------------
-# Install Discord
-#-------------------------
-# flatpak install flathub com.discordapp.Discord -y
 
 #-------------------------
 # Install VLC
@@ -195,9 +184,10 @@ cat tobash.conf >> $HOME/.bashrc
 #-------------------------
 # Customize Gnome
 #-------------------------
-sudo apt install gnome-tweaks
-
 git clone https://github.com/jmattheis/gruvbox-dark-icons-gtk ~/.icons/gruvbox-dark-icons-gtk
+gsettings set org.gnome.desktop.interface icon-theme 'Gruvbox-dark-icons-gtk'
+
+sudo cp ./gnome-shell.css /usr/share/themes/Pop-dark/gnome-shell/gnome-shell.css
 
 echo "# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #"
 echo "Install the Nordic theme from here: https://github.com/EliverLara/Nordic"
