@@ -21,9 +21,10 @@ if ! [ -x "$(command -v flatpak)" ]; then
 	echo 'ERROR: Flatpak is not installed.' >&2
 	echo 'Installing Flatpak...'
 	sudo apt install flatpak
-	flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+	flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 	echo 'Flatpak is installed!'
 else
+	flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 	echo 'Flatpak is installed!' >&2
 fi
 
@@ -40,8 +41,8 @@ sudo apt update && sudo apt install gh -y
 # Download YoutubeMusic
 #-------------------------
 RELEASE_VERSION_YTM=$(wget -qO - "https://api.github.com/repos/th-ch/youtube-music/releases/latest" | grep -Po '"tag_name": ?"v\K.*?(?=")')
-wget -O $HOME/Downloads/YTM.deb "https://github.com/th-ch/youtube-music/releases/download/v${RELEASE_VERSION_YTM}/youtube-music_${RELEASE_VERSION_YTM}_amd64.deb"
-sudo dpkg -i $HOME/Downloads/YTM.deb
+wget -O /home/$SUDO_USER/Downloads/YTM.deb "https://github.com/th-ch/youtube-music/releases/download/v${RELEASE_VERSION_YTM}/youtube-music_${RELEASE_VERSION_YTM}_amd64.deb"
+sudo dpkg -i /home/$SUDO_USER/Downloads/YTM.deb
 
 #-------------------------
 # Download Micro editor
@@ -57,7 +58,7 @@ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o 
 echo \
   "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
   $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-
+ 
 sudo apt update
 sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
 sudo usermod -aG docker $USER
@@ -120,7 +121,7 @@ flatpak install flathub nz.mega.MEGAsync -y
 #-------------------------
 # Install VSCodium
 #-------------------------
-# flatpak install flathub com.vscodium.codium -y
+flatpak install flathub com.vscodium.codium -y
 
 #-------------------------
 # Install Tutanota Desktop
@@ -142,12 +143,12 @@ git config --global user.email myEmailAddress
 
 if ! [ -z "$ghToken" ]; then
 	{
-		echo $ghToken >> .token.txt
-		gh auth login --with-token < .token.txt
-		rm -rf .token.txt
-		echo "Github logged in."
+	 echo $ghToken >> /home/$SUDO_USER/.token.txt
+	 gh auth login --with-token < /home/$SUDO_USER/.token.txt
+	 rm -rf /home/$SUDO_USER/.token.txt
+	 echo "Github logged in."
 	} || {
-		echo "Github NOT logged in. Check if everything is good or retry."
+	 echo "Github NOT logged in. Check if everything is good or retry."
 	}
 else
 	echo "No GH Token has been passed."
@@ -157,14 +158,14 @@ fi
 # Installing Miniconda
 #-------------------------
 printf "Downloading miniconda installer and installing miniconda for Linux"
-wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O $HOME/Downloads/miniconda.sh
-bash $HOME/Downloads/miniconda.sh -b -p $HOME/miniconda
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O /home/$SUDO_USER/Downloads/miniconda.sh
+bash /home/$SUDO_USER/Downloads/miniconda.sh -b -p /home/$SUDO_USER/miniconda
 
 if ! [ -x "$(command -v conda)" ]; then
 	export PATH="$HOME/miniconda/bin:$PATH"
-	conda init
+	/home/$SUDO_USER/miniconda/bin/conda init
 else
-	conda init
+	/home/$SUDO_USER/miniconda/bin/conda init
 fi
 
 #-------------------------
@@ -172,22 +173,22 @@ fi
 #-------------------------
 # Create the directory inside .config for the shell configs
 printf "Copy prompt file to folder"
-mkdir -p $HOME/.config/gr8sh/
-cp ./prompt.sh $HOME/.config/gr8sh/
-cp ./prompt.config $HOME/.config/gr8sh/
+mkdir -p /home/$SUDO_USER/.config/gr8sh/
+sudo cp $PWD/prompt.sh /home/$SUDO_USER/.config/gr8sh/
+sudo cp $PWD/prompt.config /home/$SUDO_USER/.config/gr8sh/
 
 #-------------------------
 # Update .bashrc
 #-------------------------
-cat tobash.conf >> $HOME/.bashrc
+cat tobash.conf >> /home/$SUDO_USER/.bashrc
 
 #-------------------------
 # Customize Gnome
 #-------------------------
-git clone https://github.com/jmattheis/gruvbox-dark-icons-gtk ~/.icons/gruvbox-dark-icons-gtk
+git clone https://github.com/jmattheis/gruvbox-dark-icons-gtk /home/$SUDO_USER/.icons/gruvbox-dark-icons-gtk
 gsettings set org.gnome.desktop.interface icon-theme 'Gruvbox-dark-icons-gtk'
 
-sudo cp ./gnome-shell.css /usr/share/themes/Pop-dark/gnome-shell/gnome-shell.css
+#sudo cp ./gnome-shell.css /usr/share/themes/Pop-dark/gnome-shell/gnome-shell.css
 
 echo "# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #"
 echo "Install the Nordic theme from here: https://github.com/EliverLara/Nordic"
