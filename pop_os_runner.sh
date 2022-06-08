@@ -1,5 +1,7 @@
 #!/bin/bash
 
+CDY="$(echo $PWD)"
+
 echo "# # # # # # # # #"
 echo "# Github setup  #"
 echo "# # # # # # # # #"
@@ -10,10 +12,10 @@ read -sp "Github token: " ghToken
 sudo apt update && sudo apt upgrade -y
 
 # Adding VSCode repos
-#wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
-#sudo install -o root -g root -m 644 packages.microsoft.gpg /etc/apt/trusted.gpg.d/
-#sudo sh -c 'echo "deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'
-#rm -f packages.microsoft.gpg
+wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
+sudo install -o root -g root -m 644 packages.microsoft.gpg /etc/apt/trusted.gpg.d/
+sudo sh -c 'echo "deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'
+rm -f packages.microsoft.gpg
 
 
 # Check if flatpak is installed, if not install
@@ -30,7 +32,7 @@ fi
 
 # Install some softwares via apt
 sudo apt install apt-transport-https ca-certificates gnupg lsb-release fonts-powerline lm-sensors
-sudo apt install gnome-tweaks firefox git wget curl -y # code
+sudo apt install code gnome-tweaks firefox git wget curl -y # code
 
 # Install GH CLI
 curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
@@ -61,7 +63,7 @@ echo \
  
 sudo apt update
 sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
-sudo usermod -aG docker $USER
+sudo usermod -aG docker $SUDO_USER
 
 #-------------------------
 # Install OnlyOffice
@@ -121,7 +123,7 @@ flatpak install flathub nz.mega.MEGAsync -y
 #-------------------------
 # Install VSCodium
 #-------------------------
-flatpak install flathub com.vscodium.codium -y
+# flatpak install flathub com.vscodium.codium -y
 
 #-------------------------
 # Install Tutanota Desktop
@@ -133,6 +135,9 @@ flatpak install flathub com.tutanota.Tutanota -y
 #-------------------------
 git clone https://github.com/AdnanHodzic/auto-cpufreq.git
 cd auto-cpufreq && sudo ./auto-cpufreq-installer
+cd ..
+
+sudo cp $CDY/auto-cpufreq.conf /etc/auto-cpufreq.conf
 
 #-------------------------
 # Settings git config
@@ -174,8 +179,8 @@ fi
 # Create the directory inside .config for the shell configs
 printf "Copy prompt file to folder"
 mkdir -p /home/$SUDO_USER/.config/gr8sh/
-sudo cp $PWD/prompt.sh /home/$SUDO_USER/.config/gr8sh/
-sudo cp $PWD/prompt.config /home/$SUDO_USER/.config/gr8sh/
+sudo cp $CDY/prompt.sh /home/$SUDO_USER/.config/gr8sh/
+sudo cp $CDY/prompt.config /home/$SUDO_USER/.config/gr8sh/
 
 #-------------------------
 # Update .bashrc
@@ -186,7 +191,7 @@ cat tobash.conf >> /home/$SUDO_USER/.bashrc
 # Customize Gnome
 #-------------------------
 git clone https://github.com/jmattheis/gruvbox-dark-icons-gtk /home/$SUDO_USER/.icons/gruvbox-dark-icons-gtk
-gsettings set org.gnome.desktop.interface icon-theme 'Gruvbox-dark-icons-gtk'
+gsettings set org.gnome.desktop.interface icon-theme 'gruvbox-dark-icons-gtk'
 
 #sudo cp ./gnome-shell.css /usr/share/themes/Pop-dark/gnome-shell/gnome-shell.css
 
