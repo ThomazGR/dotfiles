@@ -9,7 +9,13 @@ read -p "Email address: " myEmailAddress
 read -p "Github username: " githubUserName
 read -sp "Github token: " ghToken
 
-sudo apt update && sudo apt upgrade -y
+echo "deb http://deb.volian.org/volian/ scar main" | sudo tee /etc/apt/sources.list.d/volian-archive-scar-unstable.list
+wget -qO - https://deb.volian.org/volian/scar.key | sudo tee /etc/apt/trusted.gpg.d/volian-archive-scar-unstable.gpg > /dev/null
+echo "deb-src http://deb.volian.org/volian/ scar main" | sudo tee -a /etc/apt/sources.list.d/volian-archive-scar-unstable.list
+
+sudo apt update && sudo apt install nala
+
+sudo nala upgrade -y
 
 # Adding VSCode repos
 # wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
@@ -22,7 +28,7 @@ sudo apt update && sudo apt upgrade -y
 if ! [ -x "$(command -v flatpak)" ]; then
 	echo 'ERROR: Flatpak is not installed.' >&2
 	echo 'Installing Flatpak...'
-	sudo apt install flatpak
+	sudo nala install flatpak
 	flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 	echo 'Flatpak is installed!'
 else
@@ -31,13 +37,13 @@ else
 fi
 
 # Install some softwares via apt
-sudo apt install apt-transport-https ca-certificates gnupg lsb-release fonts-powerline lm-sensors
-sudo apt install gnome-tweaks firefox git wget curl -y # code
+sudo nala install apt-transport-https ca-certificates gnupg lsb-release fonts-powerline lm-sensors
+sudo nala install gnome-tweaks firefox git wget curl -y # code
 
 # Install GH CLI
 curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
-sudo apt update && sudo apt install gh -y
+sudo nala update && sudo nala install gh -y
 
 #-------------------------
 # Download YoutubeMusic
@@ -45,6 +51,7 @@ sudo apt update && sudo apt install gh -y
 RELEASE_VERSION_YTM=$(wget -qO - "https://api.github.com/repos/th-ch/youtube-music/releases/latest" | grep -Po '"tag_name": ?"v\K.*?(?=")')
 wget -O /home/$SUDO_USER/Downloads/YTM.deb "https://github.com/th-ch/youtube-music/releases/download/v${RELEASE_VERSION_YTM}/youtube-music_${RELEASE_VERSION_YTM}_amd64.deb"
 sudo dpkg -i /home/$SUDO_USER/Downloads/YTM.deb
+sudo nala install -f
 
 #-------------------------
 # Download Micro editor
@@ -61,8 +68,8 @@ echo \
   "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
   $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
  
-sudo apt update
-sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+sudo nala update
+sudo nala install docker-ce docker-ce-cli containerd.io docker-compose-plugin
 sudo usermod -aG docker $SUDO_USER
 
 #-------------------------
