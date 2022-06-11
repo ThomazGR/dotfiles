@@ -12,10 +12,10 @@ read -sp "Github token: " ghToken
 sudo apt update && sudo apt upgrade -y
 
 # Adding VSCode repos
-wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
-sudo install -o root -g root -m 644 packages.microsoft.gpg /etc/apt/trusted.gpg.d/
-sudo sh -c 'echo "deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'
-rm -f packages.microsoft.gpg
+# wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
+# sudo install -o root -g root -m 644 packages.microsoft.gpg /etc/apt/trusted.gpg.d/
+# sudo sh -c 'echo "deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'
+# rm -f packages.microsoft.gpg
 
 
 # Check if flatpak is installed, if not install
@@ -32,7 +32,7 @@ fi
 
 # Install some softwares via apt
 sudo apt install apt-transport-https ca-certificates gnupg lsb-release fonts-powerline lm-sensors
-sudo apt install code gnome-tweaks firefox git wget curl -y # code
+sudo apt install gnome-tweaks firefox git wget curl -y # code
 
 # Install GH CLI
 curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
@@ -131,6 +131,11 @@ flatpak install flathub nz.mega.MEGAsync -y
 flatpak install flathub com.tutanota.Tutanota -y
 
 #-------------------------
+# Install Gnome Auth
+#-------------------------
+flatpak install flathub com.belmoussaoui.Authenticator -y
+
+#-------------------------
 # Install auto-cpufreq
 #-------------------------
 git clone https://github.com/AdnanHodzic/auto-cpufreq.git
@@ -179,8 +184,21 @@ fi
 # Create the directory inside .config for the shell configs
 printf "Copy prompt file to folder"
 mkdir -p /home/$SUDO_USER/.config/gr8sh/
-sudo cp $CDY/prompt.sh /home/$SUDO_USER/.config/gr8sh/
-sudo cp $CDY/prompt.config /home/$SUDO_USER/.config/gr8sh/
+sudo cp $CDY/config/gr8sh/prompt.sh /home/$SUDO_USER/.config/gr8sh/
+sudo cp $CDY/config/gr8sh/prompt.config /home/$SUDO_USER/.config/gr8sh/
+
+#-------------------------
+# Copy micro configs
+#-------------------------
+printf "Copy micro config to folder"
+sudo cp $CDY/config/micro/settings.json /home/$SUDO_USER/.config/micro/
+sudo cp $CDY/config/micro/bindings.json /home/$SUDO_USER/.config/micro/
+
+micro --plugin install lsp
+micro --plugin install filemanager
+
+pip install python-lsp-server[all]
+pip install pylsp-mypy
 
 #-------------------------
 # Update .bashrc
