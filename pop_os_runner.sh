@@ -23,6 +23,19 @@ sudo nala upgrade -y
 # sudo sh -c 'echo "deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'
 # rm -f packages.microsoft.gpg
 
+# Install VSCodium
+wget -qO - https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg \
+    | gpg --dearmor \
+    | sudo dd of=/usr/share/keyrings/vscodium-archive-keyring.gpg
+
+echo 'deb [ signed-by=/usr/share/keyrings/vscodium-archive-keyring.gpg ] https://paulcarroty.gitlab.io/vscodium-deb-rpm-repo/debs vscodium main' \
+    | sudo tee /etc/apt/sources.list.d/vscodium.list
+
+sudo nala update && sudo nala install codium
+
+# Copy Codium config file
+sudo cp $CDY/.config/VSCodium/product.json /home/$SUDO_USER/.config/VSCodium/
+sudo cp $CDY/.config/VSCodium/User/* /home/$SUDO_USER/.config/VSCodium/User/
 
 # Check if flatpak is installed, if not install
 if ! [ -x "$(command -v flatpak)" ]; then
@@ -38,7 +51,7 @@ fi
 
 # Install some softwares via apt
 sudo nala install apt-transport-https ca-certificates gnupg lsb-release fonts-powerline lm-sensors
-sudo nala install gnome-tweaks firefox git wget curl -y # code
+sudo nala install xclip gnome-tweaks firefox git wget curl -y # code
 
 # Install GH CLI
 curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
@@ -128,11 +141,6 @@ flatpak install flathub network.loki.Session -y
 flatpak install flathub nz.mega.MEGAsync -y
 
 #-------------------------
-# Install VSCodium
-#-------------------------
-# flatpak install flathub com.vscodium.codium -y
-
-#-------------------------
 # Install Tutanota Desktop
 #-------------------------
 flatpak install flathub com.tutanota.Tutanota -y
@@ -191,15 +199,15 @@ fi
 # Create the directory inside .config for the shell configs
 printf "Copy prompt file to folder"
 mkdir -p /home/$SUDO_USER/.config/gr8sh/
-sudo cp $CDY/config/gr8sh/prompt.sh /home/$SUDO_USER/.config/gr8sh/
-sudo cp $CDY/config/gr8sh/prompt.config /home/$SUDO_USER/.config/gr8sh/
+sudo cp $CDY/.config/gr8sh/prompt.sh /home/$SUDO_USER/.config/gr8sh/
+sudo cp $CDY/.config/gr8sh/prompt.config /home/$SUDO_USER/.config/gr8sh/
 
 #-------------------------
 # Copy micro configs
 #-------------------------
 printf "Copy micro config to folder"
-sudo cp $CDY/config/micro/settings.json /home/$SUDO_USER/.config/micro/
-sudo cp $CDY/config/micro/bindings.json /home/$SUDO_USER/.config/micro/
+sudo cp $CDY/.config/micro/settings.json /home/$SUDO_USER/.config/micro/
+sudo cp $CDY/.config/micro/bindings.json /home/$SUDO_USER/.config/micro/
 
 micro --plugin install lsp
 micro --plugin install filemanager
@@ -217,8 +225,6 @@ cat tobash.conf >> /home/$SUDO_USER/.bashrc
 #-------------------------
 git clone https://github.com/jmattheis/gruvbox-dark-icons-gtk /home/$SUDO_USER/.icons/gruvbox-dark-icons-gtk
 gsettings set org.gnome.desktop.interface icon-theme 'gruvbox-dark-icons-gtk'
-
-#sudo cp ./gnome-shell.css /usr/share/themes/Pop-dark/gnome-shell/gnome-shell.css
 
 echo "# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #"
 echo "Install the Nordic theme from here: https://github.com/EliverLara/Nordic"
