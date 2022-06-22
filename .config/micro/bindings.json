@@ -1,5 +1,12 @@
 {
     "Alt-/": "lua:comment.comment",
-    "CtrlUnderscore": "lua:comment.comment",
-    "Alt-t": "command:tree"
+    "Alt-c": "lua:comment.comment",
+    "Alt-d": "DeleteLine",
+    "Alt-f": "command:format",
+    "Alt-k": "command:hover",
+    "Alt-r": "command:references",
+    "Alt-t": "command:tree",
+    "Alt-x": "ShellMode",
+    "CtrlSpace": "command:lspcompletion",
+    "CtrlUnderscore": "lua:comment.comment"
 }

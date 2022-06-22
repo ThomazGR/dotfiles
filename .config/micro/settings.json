@@ -1,4 +1,6 @@
 {
-    "colorscheme": "monokai-dark",
-    "filemanager-openonstart": true
+    "colorscheme": "gruvbox",
+    "filemanager-openonstart": true,
+    "lsp.formatOnSave": false,
+    "lsp.server": "python=pylsp,typescript=deno lsp,javascript=deno lsp,markdown=deno lsp,json=deno lsp,jsonc=deno lsp,lua=lua-lsp"
 }

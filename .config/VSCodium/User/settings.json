@@ -1,5 +1,17 @@
 {
     "workbench.iconTheme": "vscode-icons",
     "vsicons.dontShowNewVersionMessage": true,
-    "workbench.colorTheme": "Andromeda"
+    "workbench.colorTheme": "Andromeda",
+    "workbench.startupEditor": "none",
+    "telemetry.enableTelemetry": false,
+    "telemetry.enableCrashReporter": false,
+    "workbench.enableExperiments": false,
+    "workbench.settings.enableNaturalLanguageSearch": false,
+    "editor.tabSize": 4,
+    "window.menuBarVisibility": "toggle",
+    "extensions.ignoreRecommendations": true,
+    "editor.rulers": [120],
+    "editor.autoClosingQuotes": "always",
+    "editor.autoClosingBrackets": "always",
+    "update.enableWindowsBackgroundUpdates": false,
 }

@@ -108,7 +108,7 @@ flatpak install flathub com.mattjakeman.ExtensionManager -y
 #-------------------------
 # Install GH Desktop
 #-------------------------
-flatpak install flathub io.github.shiftey.Desktop -y
+# flatpak install flathub io.github.shiftey.Desktop -y
 
 #-------------------------
 # Install Thunderbird
