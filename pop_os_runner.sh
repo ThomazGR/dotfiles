@@ -2,6 +2,8 @@
 
 CDY="$(echo $PWD)"
 
+CURRENT_USER="$(echo $USER)"
+
 echo "# # # # # # # # #"
 echo "# Github setup  #"
 echo "# # # # # # # # #"
@@ -34,8 +36,8 @@ echo 'deb [ signed-by=/usr/share/keyrings/vscodium-archive-keyring.gpg ] https:/
 sudo nala update && sudo nala install codium
 
 # Copy Codium config file
-sudo cp $CDY/.config/VSCodium/product.json /home/$SUDO_USER/.config/VSCodium/
-sudo cp $CDY/.config/VSCodium/User/* /home/$SUDO_USER/.config/VSCodium/User/
+sudo cp $CDY/.config/VSCodium/product.json /home/$CURRENT_USER/.config/VSCodium/
+sudo cp $CDY/.config/VSCodium/User/* /home/$CURRENT_USER/.config/VSCodium/User/
 
 # Check if flatpak is installed, if not install
 if ! [ -x "$(command -v flatpak)" ]; then
@@ -62,8 +64,8 @@ sudo nala update && sudo nala install gh -y
 # Download YoutubeMusic
 #-------------------------
 RELEASE_VERSION_YTM=$(wget -qO - "https://api.github.com/repos/th-ch/youtube-music/releases/latest" | grep -Po '"tag_name": ?"v\K.*?(?=")')
-wget -O /home/$SUDO_USER/Downloads/YTM.deb "https://github.com/th-ch/youtube-music/releases/download/v${RELEASE_VERSION_YTM}/youtube-music_${RELEASE_VERSION_YTM}_amd64.deb"
-sudo dpkg -i /home/$SUDO_USER/Downloads/YTM.deb
+wget -O /home/$CURRENT_USER/Downloads/YTM.deb "https://github.com/th-ch/youtube-music/releases/download/v${RELEASE_VERSION_YTM}/youtube-music_${RELEASE_VERSION_YTM}_amd64.deb"
+sudo dpkg -i /home/$CURRENT_USER/Downloads/YTM.deb
 sudo nala install -f
 
 #-------------------------
@@ -83,7 +85,7 @@ echo \
  
 sudo nala update
 sudo nala install docker-ce docker-ce-cli containerd.io docker-compose-plugin
-sudo usermod -aG docker $SUDO_USER
+sudo usermod -aG docker $CURRENT_USER
 
 #-------------------------
 # Install OnlyOffice
@@ -168,9 +170,9 @@ git config --global user.email myEmailAddress
 
 if ! [ -z "$ghToken" ]; then
 	{
-	 echo $ghToken >> /home/$SUDO_USER/.token.txt
-	 gh auth login --with-token < /home/$SUDO_USER/.token.txt
-	 rm -rf /home/$SUDO_USER/.token.txt
+	 echo $ghToken >> /home/$CURRENT_USER/.token.txt
+	 gh auth login --with-token < /home/$CURRENT_USER/.token.txt
+	 rm -rf /home/$CURRENT_USER/.token.txt
 	 echo "Github logged in."
 	} || {
 	 echo "Github NOT logged in. Check if everything is good or retry."
@@ -183,14 +185,14 @@ fi
 # Installing Miniconda
 #-------------------------
 printf "Downloading miniconda installer and installing miniconda for Linux"
-wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O /home/$SUDO_USER/Downloads/miniconda.sh
-bash /home/$SUDO_USER/Downloads/miniconda.sh -b -p /home/$SUDO_USER/miniconda
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O /home/$CURRENT_USER/Downloads/miniconda.sh
+bash /home/$CURRENT_USER/Downloads/miniconda.sh -b -p /home/$CURRENT_USER/miniconda
 
 if ! [ -x "$(command -v conda)" ]; then
 	export PATH="$HOME/miniconda/bin:$PATH"
-	/home/$SUDO_USER/miniconda/bin/conda init
+	/home/$CURRENT_USER/miniconda/bin/conda init
 else
-	/home/$SUDO_USER/miniconda/bin/conda init
+	/home/$CURRENT_USER/miniconda/bin/conda init
 fi
 
 #-------------------------
@@ -198,16 +200,16 @@ fi
 #-------------------------
 # Create the directory inside .config for the shell configs
 printf "Copy prompt file to folder"
-mkdir -p /home/$SUDO_USER/.config/gr8sh/
-sudo cp $CDY/.config/gr8sh/prompt.sh /home/$SUDO_USER/.config/gr8sh/
-sudo cp $CDY/.config/gr8sh/prompt.config /home/$SUDO_USER/.config/gr8sh/
+mkdir -p /home/$CURRENT_USER/.config/gr8sh/
+sudo cp $CDY/.config/gr8sh/prompt.sh /home/$CURRENT_USER/.config/gr8sh/
+sudo cp $CDY/.config/gr8sh/prompt.config /home/$CURRENT_USER/.config/gr8sh/
 
 #-------------------------
 # Copy micro configs
 #-------------------------
 printf "Copy micro config to folder"
-sudo cp $CDY/.config/micro/settings.json /home/$SUDO_USER/.config/micro/
-sudo cp $CDY/.config/micro/bindings.json /home/$SUDO_USER/.config/micro/
+sudo cp $CDY/.config/micro/settings.json /home/$CURRENT_USER/.config/micro/
+sudo cp $CDY/.config/micro/bindings.json /home/$CURRENT_USER/.config/micro/
 
 micro --plugin install lsp
 micro --plugin install filemanager
@@ -218,12 +220,12 @@ pip install pylsp-mypy
 #-------------------------
 # Update .bashrc
 #-------------------------
-cat tobash.conf >> /home/$SUDO_USER/.bashrc
+cat tobash.conf >> /home/$CURRENT_USER/.bashrc
 
 #-------------------------
 # Customize Gnome
 #-------------------------
-git clone https://github.com/jmattheis/gruvbox-dark-icons-gtk /home/$SUDO_USER/.icons/gruvbox-dark-icons-gtk
+git clone https://github.com/jmattheis/gruvbox-dark-icons-gtk /home/$CURRENT_USER/.icons/gruvbox-dark-icons-gtk
 gsettings set org.gnome.desktop.interface icon-theme 'gruvbox-dark-icons-gtk'
 
 echo "# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #"
