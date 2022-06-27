@@ -1,8 +1,10 @@
 #!/bin/bash
 
 CDY="$(echo $PWD)"
-
 CURRENT_USER="$(echo $USER)"
+
+echo "Current directory: $CDY"
+echo "Current user: $CURRENT_USER"
 
 echo "# # # # # # # # #"
 echo "# Github setup  #"
@@ -228,6 +230,9 @@ cat tobash.conf >> /home/$CURRENT_USER/.bashrc
 git clone https://github.com/jmattheis/gruvbox-dark-icons-gtk /home/$CURRENT_USER/.icons/gruvbox-dark-icons-gtk
 gsettings set org.gnome.desktop.interface icon-theme 'gruvbox-dark-icons-gtk'
 
-echo "# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #"
-echo "Install the Nordic theme from here: https://github.com/EliverLara/Nordic"
-echo "# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #"
+#-------------------------
+# Install Polybar and rofi
+#-------------------------
+sudo nala install polybar rofi
+sudo cp $CDY/.config/polybar/* /home/$CURRENT_USER/.config/polybar/
+
