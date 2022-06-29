@@ -38,8 +38,8 @@ echo 'deb [ signed-by=/usr/share/keyrings/vscodium-archive-keyring.gpg ] https:/
 sudo nala update && sudo nala install codium
 
 # Copy Codium config file
-sudo cp $CDY/.config/VSCodium/product.json /home/$CURRENT_USER/.config/VSCodium/
-sudo cp $CDY/.config/VSCodium/User/* /home/$CURRENT_USER/.config/VSCodium/User/
+sudo cp $CDY/VSCodium/product.json /home/$CURRENT_USER/.config/VSCodium/
+sudo cp $CDY/VSCodium/User/* /home/$CURRENT_USER/.config/VSCodium/User/
 
 # Check if flatpak is installed, if not install
 if ! [ -x "$(command -v flatpak)" ]; then
@@ -54,8 +54,8 @@ else
 fi
 
 # Install some softwares via apt
-sudo nala install apt-transport-https ca-certificates gnupg lsb-release fonts-powerline lm-sensors
-sudo nala install xclip gnome-tweaks firefox git wget curl -y # code
+sudo nala install apt-transport-https ca-certificates gnupg lsb-release fonts-powerline lm-sensors -y
+sudo nala install xdotool xclip gnome-tweaks firefox git wget curl -y # code
 
 # Install GH CLI
 curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
@@ -67,8 +67,7 @@ sudo nala update && sudo nala install gh -y
 #-------------------------
 RELEASE_VERSION_YTM=$(wget -qO - "https://api.github.com/repos/th-ch/youtube-music/releases/latest" | grep -Po '"tag_name": ?"v\K.*?(?=")')
 wget -O /home/$CURRENT_USER/Downloads/YTM.deb "https://github.com/th-ch/youtube-music/releases/download/v${RELEASE_VERSION_YTM}/youtube-music_${RELEASE_VERSION_YTM}_amd64.deb"
-sudo dpkg -i /home/$CURRENT_USER/Downloads/YTM.deb
-sudo nala install -f
+sudo nala install /home/$CURRENT_USER/Downloads/YTM.deb
 
 #-------------------------
 # Download Micro editor
@@ -157,9 +156,8 @@ flatpak install flathub com.belmoussaoui.Authenticator -y
 #-------------------------
 # Install auto-cpufreq
 #-------------------------
-git clone https://github.com/AdnanHodzic/auto-cpufreq.git
-cd auto-cpufreq && sudo ./auto-cpufreq-installer
-cd ..
+git clone https://github.com/AdnanHodzic/auto-cpufreq.git /home/$CURRENT_USER/auto-cpufreq
+cd /home/$CURRENT_USER/auto-cpufreq && sudo ./auto-cpufreq-installer
 
 sudo cp $CDY/auto-cpufreq.conf /etc/auto-cpufreq.conf
 
@@ -203,15 +201,15 @@ fi
 # Create the directory inside .config for the shell configs
 printf "Copy prompt file to folder"
 mkdir -p /home/$CURRENT_USER/.config/gr8sh/
-sudo cp $CDY/.config/gr8sh/prompt.sh /home/$CURRENT_USER/.config/gr8sh/
-sudo cp $CDY/.config/gr8sh/prompt.config /home/$CURRENT_USER/.config/gr8sh/
+sudo cp $CDY/gr8sh/prompt.sh /home/$CURRENT_USER/.config/gr8sh/
+sudo cp $CDY/gr8sh/prompt.config /home/$CURRENT_USER/.config/gr8sh/
 
 #-------------------------
 # Copy micro configs
 #-------------------------
 printf "Copy micro config to folder"
-sudo cp $CDY/.config/micro/settings.json /home/$CURRENT_USER/.config/micro/
-sudo cp $CDY/.config/micro/bindings.json /home/$CURRENT_USER/.config/micro/
+sudo cp $CDY/micro/settings.json /home/$CURRENT_USER/.config/micro/
+sudo cp $CDY/micro/bindings.json /home/$CURRENT_USER/.config/micro/
 
 micro --plugin install lsp
 micro --plugin install filemanager
@@ -234,5 +232,6 @@ gsettings set org.gnome.desktop.interface icon-theme 'gruvbox-dark-icons-gtk'
 # Install Polybar and rofi
 #-------------------------
 sudo nala install polybar rofi
-sudo cp $CDY/.config/polybar/* /home/$CURRENT_USER/.config/polybar/
+sudo cp $CDY/polybar/* /home/$CURRENT_USER/.config/polybar/
+sudo cp $CDY/rofi/* /home/$CURRENT_USER/.config/rofi/
 
