@@ -49,7 +49,7 @@ else
 fi
 
 if [[ "$isPaused" == "Paused" ]] ; then
-	echo " $songTitle - $songArtist"
+	echo " ${songTitle:0:30} - ${songArtist:0:30}"
 elif [[ "$isPaused" == "Playing" ]] ; then
-	echo " $songTitle - $songArtist"
+	echo " ${songTitle:0:30} - ${songArtist:0:30}"
 fi
