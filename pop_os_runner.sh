@@ -21,12 +21,6 @@ sudo apt update && sudo apt install nala
 
 sudo nala upgrade -y
 
-# Adding VSCode repos
-# wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
-# sudo install -o root -g root -m 644 packages.microsoft.gpg /etc/apt/trusted.gpg.d/
-# sudo sh -c 'echo "deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'
-# rm -f packages.microsoft.gpg
-
 # Install VSCodium
 wget -qO - https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg \
     | gpg --dearmor \
@@ -107,16 +101,6 @@ flatpak install flathub com.bitwarden.desktop -y
 # Install Ext Manager
 #-------------------------
 flatpak install flathub com.mattjakeman.ExtensionManager -y
-
-#-------------------------
-# Install GH Desktop
-#-------------------------
-# flatpak install flathub io.github.shiftey.Desktop -y
-
-#-------------------------
-# Install Thunderbird
-#-------------------------
-flatpak install flathub org.mozilla.Thunderbird -y
 
 #-------------------------
 # Install Jitsi Meet
