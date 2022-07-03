@@ -162,9 +162,10 @@ git config --global user.email myEmailAddress
 
 if ! [ -z "$ghToken" ]; then
 	{
-	 echo $ghToken >> /home/$CURRENT_USER/.token.txt
-	 gh auth login --with-token < /home/$CURRENT_USER/.token.txt
-	 rm -rf /home/$CURRENT_USER/.token.txt
+	 sudo touch /home/$CURRENT_USER/.token.txt
+	 echo $ghToken >> sudo /home/$CURRENT_USER/.token.txt
+	 gh auth login --with-token < sudo /home/$CURRENT_USER/.token.txt
+	 sudo rm -rf /home/$CURRENT_USER/.token.txt
 	 echo "Github logged in."
 	} || {
 	 echo "Github NOT logged in. Check if everything is good or retry."
@@ -212,7 +213,7 @@ pip install pylsp-mypy
 #-------------------------
 # Update .bashrc
 #-------------------------
-cat tobash.conf >> /home/$CURRENT_USER/.bashrc
+cat $CDY/tobash.conf >> sudo /home/$CURRENT_USER/.bashrc
 
 #-------------------------
 # Customize Gnome
