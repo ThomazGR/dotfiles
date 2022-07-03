@@ -16,7 +16,9 @@ elif [ $WM_DESKTOP != "1883" ]; then
 	if [ $WM_CLASS == 'Gnome-terminal' ]; then
 
 		echo "%{F#ffffff}Terminal%{u-}"
+	elif [ $WM_CLASS == 'Brave-browser' ]; then
 
+		echo "%{F#ffffff}Brave%{u-}"
 	elif [ $WM_CLASS == 'firefox' ]; then
 
 		echo "%{F#ffffff}Firefox%{u-}"

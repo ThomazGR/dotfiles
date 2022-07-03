@@ -79,7 +79,7 @@ echo \
   $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
  
 sudo nala update
-sudo nala install docker-ce docker-ce-cli containerd.io docker-compose-plugin --yes
+sudo nala install docker-ce docker-ce-cli containerd.io docker-compose-plugin -y
 sudo usermod -aG docker $CURRENT_USER
 
 #-------------------------
@@ -223,7 +223,7 @@ gsettings set org.gnome.desktop.interface icon-theme 'gruvbox-dark-icons-gtk'
 #-------------------------
 # Install Polybar and rofi
 #-------------------------
-sudo nala install polybar rofi --yes
-sudo cp $CDY/polybar/* /home/$CURRENT_USER/.config/polybar/
-sudo cp $CDY/rofi/* /home/$CURRENT_USER/.config/rofi/
+sudo nala install polybar rofi -y
+sudo cp -r $CDY/polybar/* /home/$CURRENT_USER/.config/polybar/
+sudo cp -r $CDY/rofi/* /home/$CURRENT_USER/.config/rofi/
 
