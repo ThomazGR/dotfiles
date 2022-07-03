@@ -698,7 +698,7 @@ combine_elements()
 		"USER")  local text="$user :: " ;;
 		"HOST")  local text="$host @ " ;;
 		"PWD")   local text="$path" ;;
-		"GIT")   local text=" [ $git_branch  ]" ;;
+		"GIT")   local text=" שׂ $git_branch " ;;
 		"PYENV") local text="[ $pyenv ] " ;;
 		"TF")    local text="$tf" ;;
 		"CLOCK") local text="$clock" ;;
