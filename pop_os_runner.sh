@@ -137,12 +137,24 @@ flatpak install flathub com.tutanota.Tutanota -y
 #-------------------------
 flatpak install flathub com.belmoussaoui.Authenticator -y
 
+#-------------------------
+# Install Zotero
+#-------------------------
 flatpak install flathub org.zotero.Zotero -y
 
+#-------------------------
+# Install Amberol
+#-------------------------
 flatpak install flathub io.bassi.Amberol -y
 
+#-------------------------
+# Install Brave Browser
+#-------------------------
 flatpak install flathub com.brave.Browser -y
 
+#-------------------------
+# Install Flatseal
+#-------------------------
 flatpak install flathub com.github.tchx84.Flatseal -y
 
 #-------------------------
