@@ -17,7 +17,7 @@ echo "deb http://deb.volian.org/volian/ scar main" | sudo tee /etc/apt/sources.l
 wget -qO - https://deb.volian.org/volian/scar.key | sudo tee /etc/apt/trusted.gpg.d/volian-archive-scar-unstable.gpg > /dev/null
 echo "deb-src http://deb.volian.org/volian/ scar main" | sudo tee -a /etc/apt/sources.list.d/volian-archive-scar-unstable.list
 
-sudo apt update && sudo apt install nala
+sudo apt update && sudo apt install nala -y
 
 sudo nala upgrade -y
 
@@ -29,7 +29,7 @@ wget -qO - https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.g
 echo 'deb [ signed-by=/usr/share/keyrings/vscodium-archive-keyring.gpg ] https://paulcarroty.gitlab.io/vscodium-deb-rpm-repo/debs vscodium main' \
     | sudo tee /etc/apt/sources.list.d/vscodium.list
 
-sudo nala update && sudo nala install codium
+sudo nala update && sudo nala install codium -y
 
 # Copy Codium config file
 sudo cp $CDY/VSCodium/product.json /home/$CURRENT_USER/.config/VSCodium/
@@ -79,7 +79,7 @@ echo \
   $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
  
 sudo nala update
-sudo nala install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+sudo nala install docker-ce docker-ce-cli containerd.io docker-compose-plugin --yes
 sudo usermod -aG docker $CURRENT_USER
 
 #-------------------------
@@ -136,6 +136,14 @@ flatpak install flathub com.tutanota.Tutanota -y
 # Install Gnome Auth
 #-------------------------
 flatpak install flathub com.belmoussaoui.Authenticator -y
+
+flatpak install flathub org.zotero.Zotero -y
+
+flatpak install flathub io.bassi.Amberol -y
+
+flatpak install flathub com.brave.Browser -y
+
+flatpak install flathub com.github.tchx84.Flatseal -y
 
 #-------------------------
 # Install auto-cpufreq
@@ -215,7 +223,7 @@ gsettings set org.gnome.desktop.interface icon-theme 'gruvbox-dark-icons-gtk'
 #-------------------------
 # Install Polybar and rofi
 #-------------------------
-sudo nala install polybar rofi
+sudo nala install polybar rofi --yes
 sudo cp $CDY/polybar/* /home/$CURRENT_USER/.config/polybar/
 sudo cp $CDY/rofi/* /home/$CURRENT_USER/.config/rofi/
 
