@@ -5,9 +5,9 @@ bluetooth_print() {
         if [ "$(systemctl is-active "bluetooth.service")" = "active" ]; then
         	show_info=$(bluetoothctl show)
         	if echo "$show_info" | grep -q "Powered: yes"; then
-            	printf ' Enabled'
+            	printf ' '
             else
-            	printf ' Disabled'
+            	printf ' '
             fi
 
             devices_paired=$(bluetoothctl paired-devices | grep Device | cut -d ' ' -f 2)
