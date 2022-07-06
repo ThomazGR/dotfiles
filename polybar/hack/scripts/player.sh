@@ -8,20 +8,32 @@ firefoxInstance=$(dbus-send --session \
 					awk '{print $2}' | \
 					sed -e 's:"::g')
 
+braveInstance=$(dbus-send --session \
+					--dest=org.freedesktop.DBus \
+					--print-reply /org/freedesktop/DBus org.freedesktop.DBus.ListNames | \
+					fgrep org.mpris.MediaPlayer2.chromium | \
+					head -1 | \
+					awk '{print $2}' | \
+					sed -e 's:"::g')
 
-if [[  "$firefoxInstance" == "" ]] ; then
+
+if [[ "$firefoxInstance" == "" && "$braveInstance" == "" ]] ; then
 	echo "Nothing is playing :("
+elif [[ "$firefoxInstance" == "" && "$braveInstance" != "" ]] ; then
+	playerInstance=$braveInstance
+elif [[ "$firefoxInstance" == "" && "$braveInstance" != "" ]] ; then
+	playerInstance=$firefoxInstance
 fi
 
 isPaused=$(dbus-send --print-reply \
-			--dest=$firefoxInstance \
+			--dest=$playerInstance \
 			/org/mpris/MediaPlayer2 org.freedesktop.DBus.Properties.Get \
 			string:'org.mpris.MediaPlayer2.Player' string:'PlaybackStatus' | \
 			tail -n 1 | \
 			grep -oP '(?<= ").*?(?=")')
 
 songTitle=$(dbus-send --print-reply \
-			--dest=$firefoxInstance \
+			--dest=$playerInstance \
 			/org/mpris/MediaPlayer2 org.freedesktop.DBus.Properties.Get \
 			string:'org.mpris.MediaPlayer2.Player' string:'Metadata' | \
 			grep -E 'xesam:title' -A 1 | \
@@ -29,7 +41,7 @@ songTitle=$(dbus-send --print-reply \
 			grep -oP '(?<= ").*?(?=")')
 
 songArtist=$(dbus-send --print-reply \
-			--dest=$firefoxInstance \
+			--dest=$playerInstance \
 			/org/mpris/MediaPlayer2 org.freedesktop.DBus.Properties.Get \
 			string:'org.mpris.MediaPlayer2.Player' string:'Metadata' | \
 			grep -E 'xesam:artist' -A 2 | \
