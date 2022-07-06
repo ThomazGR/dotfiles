@@ -21,7 +21,7 @@ if [[ "$firefoxInstance" == "" && "$braveInstance" == "" ]] ; then
 	echo "Nothing is playing :("
 elif [[ "$firefoxInstance" == "" && "$braveInstance" != "" ]] ; then
 	playerInstance=$braveInstance
-elif [[ "$firefoxInstance" == "" && "$braveInstance" != "" ]] ; then
+elif [[ "$firefoxInstance" != "" && "$braveInstance" == "" ]] ; then
 	playerInstance=$firefoxInstance
 fi
 
