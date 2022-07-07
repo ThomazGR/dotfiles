@@ -8,7 +8,7 @@
  */
 
 configuration {
-	font:							"FantasqueSansMono Nerd Font 12";
+	font:							"Noto Sans 10";
     show-icons:                     false;
 	icon-theme: 					"Papirus";
     drun-display-format:            "{name}";
@@ -16,15 +16,25 @@ configuration {
 	sidebar-mode: 					false;
 }
 
-@import "styles/colors.rasi"
+
+
+* {
+    background:                     #230031FF;
+    background-alt:                 #230031FF;
+    background-bar:                 #363A3FFF;
+    foreground:                     #DFDFDFFF;
+    accent:			            	#FF2E74FF;
+    white:							#FFFFFFFF;
+}
+
 
 window {
     transparency:                   "real";
     background-color:               @background;
-    text-color:                     @foreground;
+    text-color:                     @white;
     border-radius:                  0px;
     height:                         28.5%;
-    width:                          50%;
+    width:                          30%;
     location:                       center;
     x-offset:                       0;
     y-offset:                       0;
@@ -33,13 +43,13 @@ window {
 prompt {
     enabled: 						true;
     padding:                        0.5% 0.5% 0.5% 0%;
-	background-color: 				@background-alt;
-	text-color: 					@foreground;
+	background-color: 				@background;
+	text-color: 					@white;
 }
 
 textbox-prompt-colon {
 	expand: 						false;
-	str: 							"System |";
+	str: 							"Powermenu";
 	background-color: 				@background-alt;
 	text-color: 					@foreground;
     padding:                        0.5% 0.5% 0.5% 0%;
@@ -47,12 +57,12 @@ textbox-prompt-colon {
 
 inputbar {
 	children: 						[ textbox-prompt-colon, prompt ];
-    background-color:               @background-alt;
-    text-color:                     @foreground;
+    background-color:               @background;
+    text-color:                     @white;
     expand:                         false;
     border:                  		0.2% 0% 0.2% 0%;
     border-radius:                  12px;
-    border-color:                  	@border;
+    border-color:                  	#FFFFFF00;
     margin:                         0% 21.3% 0% 0%;
     padding:                        0.5%;
     position:                       center;
@@ -105,11 +115,11 @@ element alternate.active {
 }
 
 element selected {
-    background-color:               @selected;
+    background-color:               @accent;
     text-color:                     @foreground;
     border:                  		0.2% 0% 0.2% 0%;
     border-radius:                  25px;
-    border-color:                  	@border;
+    border-color:                  	@white;
 }
 
 element selected.urgent {

@@ -1,11 +1,18 @@
 /* Message Dialog */
 
-@import "styles/colors.rasi"
+* {
+    background:                     #230031FF;
+    background-alt:                 #230031FF;
+    background-bar:                 #363A3FFF;
+    foreground:                     #DFDFDFFF;
+    accent:			            	#FF2E74FF;
+    white:							#FFFFFFFF;
+}
 
 * {
     background-color:       @background;
-    text-color:             @foreground;
-	font:				 	"FantasqueSansMono Nerd Font 12";
+    text-color:             @white;
+	font:				 	"Noto Sans 10";
 }
 
 window {
@@ -13,12 +20,12 @@ window {
     padding:    			25px;
     border:					1px;
     border-radius:          0px;
-    border-color:           @border;
+    border-color:           @accent;
     location:               center;
     y-offset:               -2em;
 }
 
 entry {
     expand: 				true;
-    text-color:				@border;
+    text-color:				@white;
 }

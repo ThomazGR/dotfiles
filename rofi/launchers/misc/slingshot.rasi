@@ -30,11 +30,11 @@ configuration {
 /* -- Dark -- */
 
 * {
-    background:                     #263238FF;
-    background-alt:                 #263238FF;
+    background:                     #230031FF;
+    background-alt:                 #230031FF;
     background-bar:                 #363A3FFF;
     foreground:                     #DFDFDFFF;
-    accent:			            	#FFFFFF66;
+    accent:			            	#FF2E74FF;
 }
 
 
@@ -42,13 +42,13 @@ window {
     transparency:                   "real";
     background-color:               @background;
     text-color:                     @foreground;
-	border:							0px;
-	border-color:					@border;
+	border:							2px;
+	border-color:					@accent;
     border-radius:                  4px;
 	width:							32%;
     location:                       northwest;
-    x-offset:                       10px;
-    y-offset:                       50px;
+    x-offset:                       9px;
+    y-offset:                       53px;
 }
 
 prompt {

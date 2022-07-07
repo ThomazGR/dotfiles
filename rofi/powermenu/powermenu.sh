@@ -19,11 +19,11 @@ theme="card_rounded"
 dir="$HOME/.config/rofi/powermenu"
 
 # random colors
-styles=($(ls -p --hide="colors.rasi" $dir/styles))
-color="${styles[$(( $RANDOM % 8 ))]}"
-color="nordic.rasi"
-# comment this line to disable random colors
-sed -i -e "s/@import .*/@import \"$color\"/g" $dir/styles/colors.rasi
+#styles=($(ls -p --hide="colors.rasi" $dir/styles))
+#color="${styles[$(( $RANDOM % 8 ))]}"
+#color="nordic.rasi"
+## comment this line to disable random colors
+#sed -i -e "s/@import .*/@import \"$color\"/g" $dir/styles/colors.rasi
 
 # comment these lines to disable random style
 # themes=($(ls -p --hide="powermenu.sh" --hide="styles" --hide="confirm.rasi" --hide="message.rasi" $dir))
@@ -55,7 +55,8 @@ msg() {
 }
 
 # Variable passed to rofi
-options="$shutdown\n$reboot\n$lock\n$suspend\n$logout"
+options="$shutdown\n$reboot\n$lock"
+#\n$suspend\n$logout"
 
 chosen="$(echo -e "$options" | $rofi_command -p "Uptime: $uptime" -dmenu -selected-row 2)"
 case $chosen in
