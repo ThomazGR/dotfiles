@@ -51,7 +51,7 @@
         "when": "editorTextFocus && !editorReadonly"
     },
     {
-        "key": "ctrl+d",
+        "key": "ctrl+d ctrl+d",
         "command": "editor.action.deleteLines",
         "when": "textInputFocus && !editorReadonly"
     },
@@ -86,5 +86,37 @@
     {
         "key": "ctrl+t ctrl+s",
         "command": "workbench.action.createTerminalEditorSide"
+    },
+    {
+        "key": "ctrl+d ctrl+s",
+        "command": "deleteAllLeft"
+    },
+    {
+        "key": "ctrl+d ctrl+e",
+        "command": "deleteAllRight"
+    },
+    {
+        "key": "ctrl+d ctrl+w",
+        "command": "deleteInsideWord"
+    },
+    {
+        "key": "ctrl+d ctrl+l",
+        "command": "deleteWordLeft",
+        "when": "textInputFocus && !editorReadonly"
+    },
+    {
+        "key": "ctrl+backspace",
+        "command": "-deleteWordLeft",
+        "when": "textInputFocus && !editorReadonly"
+    },
+    {
+        "key": "ctrl+d ctrl+r",
+        "command": "deleteWordRight",
+        "when": "textInputFocus && !editorReadonly"
+    },
+    {
+        "key": "ctrl+delete",
+        "command": "-deleteWordRight",
+        "when": "textInputFocus && !editorReadonly"
     }
 ]
