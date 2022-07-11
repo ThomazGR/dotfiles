@@ -49,7 +49,7 @@ fi
 
 # Install some softwares via apt
 sudo nala install apt-transport-https ca-certificates gnupg lsb-release fonts-powerline lm-sensors -y
-sudo nala install xdotool xclip gnome-tweaks firefox git wget curl -y # code
+sudo nala install xdotool xclip gnome-tweaks firefox git wget curl -y
 
 # Install GH CLI
 curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
@@ -68,7 +68,7 @@ sudo nala install /home/$CURRENT_USER/Downloads/YTM.deb
 #-------------------------
 cd /usr/bin
 curl https://getmic.ro/r | sudo sh
-cd
+cd $CDY
 
 #-------------------------
 # Install Docker + Docker compose
@@ -105,7 +105,7 @@ flatpak install flathub com.mattjakeman.ExtensionManager -y
 #-------------------------
 # Install Jitsi Meet
 #-------------------------
-flatpak install flathub org.jitsi.jitsi-meet -y
+# flatpak install flathub org.jitsi.jitsi-meet -y
 
 #-------------------------
 # Install VLC
@@ -120,7 +120,7 @@ flatpak install flathub org.gimp.GIMP -y
 #-------------------------
 # Install Session Desktop
 #-------------------------
-flatpak install flathub network.loki.Session -y
+# flatpak install flathub network.loki.Session -y
 
 #-------------------------
 # Install MEGASync
