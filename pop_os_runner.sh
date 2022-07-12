@@ -50,6 +50,7 @@ fi
 # Install some softwares via apt
 sudo nala install apt-transport-https ca-certificates gnupg lsb-release fonts-powerline lm-sensors -y
 sudo nala install xdotool xclip gnome-tweaks firefox git wget curl -y
+sudo nala install texlive latexmk chktex -y
 
 # Install GH CLI
 curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
