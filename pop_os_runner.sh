@@ -236,6 +236,12 @@ cat $CDY/tobash.conf >> sudo /home/$CURRENT_USER/.bashrc
 git clone https://github.com/jmattheis/gruvbox-dark-icons-gtk /home/$CURRENT_USER/.icons/gruvbox-dark-icons-gtk
 gsettings set org.gnome.desktop.interface icon-theme 'gruvbox-dark-icons-gtk'
 
+# Add Doid Sans Mono Nerd Font
+mkdir -p /home/$CURRENT_USER/.local/share/fonts && \
+cd /home/$CURRENT_USER/.local/share/fonts && \
+curl -fLo "Droid Sans Mono for Powerline Nerd Font Complete.otf" \
+https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/DroidSansMono/complete/Droid%20Sans%20Mono%20Nerd%20Font%20Complete.otf
+
 #-------------------------
 # Install Polybar and rofi
 #-------------------------
