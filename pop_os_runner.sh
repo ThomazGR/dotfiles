@@ -32,6 +32,8 @@ echo 'deb [ signed-by=/usr/share/keyrings/vscodium-archive-keyring.gpg ] https:/
 sudo nala update && sudo nala install codium -y
 
 # Copy Codium config file
+sudo mkdir /home/$CURRENT_USER/.config/VSCodium
+sudo mkdir /home/$CURRENT_USER/.config/VSCodium/User
 sudo cp $CDY/VSCodium/product.json /home/$CURRENT_USER/.config/VSCodium/
 sudo cp $CDY/VSCodium/User/* /home/$CURRENT_USER/.config/VSCodium/User/
 
@@ -40,10 +42,10 @@ if ! [ -x "$(command -v flatpak)" ]; then
 	echo 'ERROR: Flatpak is not installed.' >&2
 	echo 'Installing Flatpak...'
 	sudo nala install flatpak
-	flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+	flatpak remote-add --if-not-exists --user flathub https://flathub.org/repo/flathub.flatpakrepo
 	echo 'Flatpak is installed!'
 else
-	flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+	flatpak remote-add --if-not-exists --user flathub https://flathub.org/repo/flathub.flatpakrepo
 	echo 'Flatpak is installed!' >&2
 fi
 
@@ -86,77 +88,77 @@ sudo usermod -aG docker $CURRENT_USER
 #-------------------------
 # Install OnlyOffice
 #-------------------------
-flatpak install flathub org.onlyoffice.desktopeditors -y
+flatpak install --user flathub org.onlyoffice.desktopeditors -y
 
 #-------------------------
 # Install Joplin
 #-------------------------
-flatpak install flathub net.cozic.joplin_desktop -y
+flatpak install --user flathub net.cozic.joplin_desktop -y
 
 #-------------------------
 # Install Bitwarden
 #-------------------------
-flatpak install flathub com.bitwarden.desktop -y
+flatpak install --user flathub com.bitwarden.desktop -y
 
 #-------------------------
 # Install Ext Manager
 #-------------------------
-flatpak install flathub com.mattjakeman.ExtensionManager -y
+flatpak install --user flathub com.mattjakeman.ExtensionManager -y
 
 #-------------------------
 # Install Jitsi Meet
 #-------------------------
-# flatpak install flathub org.jitsi.jitsi-meet -y
+# flatpak install --user flathub org.jitsi.jitsi-meet -y
 
 #-------------------------
 # Install VLC
 #-------------------------
-flatpak install flathub org.videolan.VLC -y
+flatpak install --user flathub org.videolan.VLC -y
 
 #-------------------------
 # Install GIMP
 #-------------------------
-flatpak install flathub org.gimp.GIMP -y
+flatpak install --user flathub org.gimp.GIMP -y
 
 #-------------------------
 # Install Session Desktop
 #-------------------------
-# flatpak install flathub network.loki.Session -y
+# flatpak install --user flathub network.loki.Session -y
 
 #-------------------------
 # Install MEGASync
 #-------------------------
-flatpak install flathub nz.mega.MEGAsync -y
+flatpak install --user flathub nz.mega.MEGAsync -y
 
 #-------------------------
 # Install Tutanota Desktop
 #-------------------------
-flatpak install flathub com.tutanota.Tutanota -y
+flatpak install --user flathub com.tutanota.Tutanota -y
 
 #-------------------------
 # Install Gnome Auth
 #-------------------------
-flatpak install flathub com.belmoussaoui.Authenticator -y
+flatpak install --user flathub com.belmoussaoui.Authenticator -y
 
 #-------------------------
 # Install Zotero
 #-------------------------
-flatpak install flathub org.zotero.Zotero -y
+flatpak install --user flathub org.zotero.Zotero -y
 
 #-------------------------
 # Install Amberol
 #-------------------------
-flatpak install flathub io.bassi.Amberol -y
+flatpak install --user flathub io.bassi.Amberol -y
 
 #-------------------------
 # Install Brave Browser
 #-------------------------
-flatpak install flathub com.brave.Browser -y
+flatpak install --user flathub com.brave.Browser -y
 
 #-------------------------
 # Install Flatseal
 #-------------------------
-flatpak install flathub com.github.tchx84.Flatseal -y
+flatpak install --user flathub com.github.tchx84.Flatseal -y
 
 #-------------------------
 # Install auto-cpufreq
@@ -238,6 +240,10 @@ gsettings set org.gnome.desktop.interface icon-theme 'gruvbox-dark-icons-gtk'
 # Install Polybar and rofi
 #-------------------------
 sudo nala install polybar rofi -y
+
+sudo mkdir /home/$CURRENT_USER/.config/polybar
 sudo cp -r $CDY/polybar/* /home/$CURRENT_USER/.config/polybar/
+
+sudo mkdir /home/$CURRENT_USER/.config/rofi
 sudo cp -r $CDY/rofi/* /home/$CURRENT_USER/.config/rofi/
 
