@@ -151,9 +151,9 @@ flatpak install --user flathub org.zotero.Zotero -y
 flatpak install --user flathub io.bassi.Amberol -y
 
 #-------------------------
-# Install Brave Browser
+# Install Ungoogled Chromium
 #-------------------------
-flatpak install --user flathub com.brave.Browser -y
+flatpak install --user flathub com.github.Eloston.UngoogledChromium -y
 
 #-------------------------
 # Install Flatseal
