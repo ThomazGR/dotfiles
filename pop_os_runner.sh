@@ -219,11 +219,11 @@ printf "Copy micro config to folder"
 sudo cp $CDY/micro/settings.json /home/$CURRENT_USER/.config/micro/
 sudo cp $CDY/micro/bindings.json /home/$CURRENT_USER/.config/micro/
 
-micro --plugin install lsp
+# micro --plugin install lsp
 micro --plugin install filemanager
 
-pip install python-lsp-server[all]
-pip install pylsp-mypy
+# pip install python-lsp-server[all]
+# pip install pylsp-mypy
 
 #-------------------------
 # Update .bashrc
@@ -233,8 +233,24 @@ cat $CDY/tobash.conf >> sudo /home/$CURRENT_USER/.bashrc
 #-------------------------
 # Customize Gnome
 #-------------------------
+mkdir /home/$CURRENT_USER/.icons
+mkdir /home/$CURRENT_USER/.themes
+
+sudo nala install unzip -y
+
+# Download gruvbox dark icon pack
 git clone https://github.com/jmattheis/gruvbox-dark-icons-gtk /home/$CURRENT_USER/.icons/gruvbox-dark-icons-gtk
-gsettings set org.gnome.desktop.interface icon-theme 'gruvbox-dark-icons-gtk'
+# gsettings set org.gnome.desktop.interface icon-theme 'gruvbox-dark-icons-gtk'
+
+# Add Dracula icon pack
+curl https://github.com/dracula/gtk/files/5214870/Dracula.zip > /home/$CURRENT_USER/.icons/Dracula.zip
+unzip /home/$CURRENT_USER/.icons/Dracula.zip
+gsettings set org.gnome.desktop.interface icon-theme "Dracula"
+
+# Add Dracula theme
+git clone https://github.com/dracula/gtk /home/$CURRENT_USER/.themes/Dracula
+gsettings set org.gnome.desktop.interface gtk-theme "Dracula"
+gsettings set org.gnome.desktop.wm.preferences theme "Dracula"
 
 # Add Doid Sans Mono Nerd Font
 mkdir -p /home/$CURRENT_USER/.local/share/fonts && \
