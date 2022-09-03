@@ -55,9 +55,9 @@ sudo nala install xdotool xclip gnome-tweaks firefox git wget curl -y
 sudo nala install texlive latexmk chktex -y
 
 # Install GH CLI
-curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
-echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
-sudo nala update && sudo nala install gh -y
+RELEASE_VERSION_GHCLI=$(wget -qO - "https://api.github.com/repos/cli/cli/releases/latest" | grep -Po '"tag_name": ?"v\K.*?(?=")')
+wget -O /home/$CURRENT_USER/Downloads/GH_CLI.deb "https://github.com/cli/cli/releases/download/v${RELEASE_VERSION_GHCLI}/gh_${RELEASE_VERSION_GHCLI}_linux_amd64.deb"
+sudo nala install /home/$CURRENT_USER/Downloads/GH_CLI.deb
 
 #-------------------------
 # Download YoutubeMusic
