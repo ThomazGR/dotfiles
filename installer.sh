@@ -86,81 +86,6 @@ sudo nala install docker-ce docker-ce-cli containerd.io docker-compose-plugin -y
 sudo usermod -aG docker $CURRENT_USER
 
 #-------------------------
-# Install OnlyOffice
-#-------------------------
-flatpak install --user flathub org.onlyoffice.desktopeditors -y
-
-#-------------------------
-# Install Joplin
-#-------------------------
-flatpak install --user flathub net.cozic.joplin_desktop -y
-
-#-------------------------
-# Install Bitwarden
-#-------------------------
-flatpak install --user flathub com.bitwarden.desktop -y
-
-#-------------------------
-# Install Ext Manager
-#-------------------------
-flatpak install --user flathub com.mattjakeman.ExtensionManager -y
-
-#-------------------------
-# Install Jitsi Meet
-#-------------------------
-# flatpak install --user flathub org.jitsi.jitsi-meet -y
-
-#-------------------------
-# Install VLC
-#-------------------------
-flatpak install --user flathub org.videolan.VLC -y
-
-#-------------------------
-# Install GIMP
-#-------------------------
-flatpak install --user flathub org.gimp.GIMP -y
-
-#-------------------------
-# Install Session Desktop
-#-------------------------
-# flatpak install --user flathub network.loki.Session -y
-
-#-------------------------
-# Install MEGASync
-#-------------------------
-flatpak install --user flathub nz.mega.MEGAsync -y
-
-#-------------------------
-# Install Tutanota Desktop
-#-------------------------
-flatpak install --user flathub com.tutanota.Tutanota -y
-
-#-------------------------
-# Install Gnome Auth
-#-------------------------
-flatpak install --user flathub com.belmoussaoui.Authenticator -y
-
-#-------------------------
-# Install Zotero
-#-------------------------
-flatpak install --user flathub org.zotero.Zotero -y
-
-#-------------------------
-# Install Amberol
-#-------------------------
-# flatpak install --user flathub io.bassi.Amberol -y
-
-#-------------------------
-# Install Ungoogled Chromium
-#-------------------------
-flatpak install --user flathub com.github.Eloston.UngoogledChromium -y
-
-#-------------------------
-# Install Flatseal
-#-------------------------
-flatpak install --user flathub com.github.tchx84.Flatseal -y
-
-#-------------------------
 # Install auto-cpufreq
 #-------------------------
 git clone https://github.com/AdnanHodzic/auto-cpufreq.git /home/$CURRENT_USER/auto-cpufreq
@@ -219,44 +144,17 @@ printf "Copy micro config to folder"
 sudo cp $CDY/micro/settings.json /home/$CURRENT_USER/.config/micro/
 sudo cp $CDY/micro/bindings.json /home/$CURRENT_USER/.config/micro/
 
-# micro --plugin install lsp
+micro --plugin install lsp
 micro --plugin install filemanager
 
-# pip install python-lsp-server[all]
-# pip install pylsp-mypy
+pip install python-lsp-server[all]
+pip install pylsp-mypy
 
 #-------------------------
 # Update .bashrc
 #-------------------------
 cat $CDY/tobash.conf >> sudo /home/$CURRENT_USER/.bashrc
 
-#-------------------------
-# Customize Gnome
-#-------------------------
-mkdir /home/$CURRENT_USER/.icons
-mkdir /home/$CURRENT_USER/.themes
-
-sudo nala install unzip -y
-
-# Download gruvbox dark icon pack
-git clone https://github.com/jmattheis/gruvbox-dark-icons-gtk /home/$CURRENT_USER/.icons/gruvbox-dark-icons-gtk
-gsettings set org.gnome.desktop.interface icon-theme 'gruvbox-dark-icons-gtk'
-
-# Add Dracula icon pack
-curl https://github.com/dracula/gtk/files/5214870/Dracula.zip > /home/$CURRENT_USER/.icons/Dracula.zip
-unzip /home/$CURRENT_USER/.icons/Dracula.zip
-gsettings set org.gnome.desktop.interface icon-theme "Dracula"
-
-# Add Dracula theme
-git clone https://github.com/dracula/gtk /home/$CURRENT_USER/.themes/Dracula
-gsettings set org.gnome.desktop.interface gtk-theme "Dracula"
-gsettings set org.gnome.desktop.wm.preferences theme "Dracula"
-
-# Add Doid Sans Mono Nerd Font
-mkdir -p /home/$CURRENT_USER/.local/share/fonts && \
-cd /home/$CURRENT_USER/.local/share/fonts && \
-curl -fLo "Droid Sans Mono for Powerline Nerd Font Complete.otf" \
-https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/DroidSansMono/complete/Droid%20Sans%20Mono%20Nerd%20Font%20Complete.otf
 
 #-------------------------
 # Install Polybar and rofi
