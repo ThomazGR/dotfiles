@@ -1,6 +1,9 @@
 {
-    "colorscheme": "gruvbox",
+    "colorscheme": "monokai-dark",
     "filemanager-openonstart": true,
+    "lsp.autocompleteDetails": true,
     "lsp.formatOnSave": false,
-    "lsp.server": "python=pylsp,typescript=deno lsp,javascript=deno lsp,markdown=deno lsp,json=deno lsp,jsonc=deno lsp,lua=lua-lsp"
+    "lsp.server": "python=pylsp,lua=lua-lsp",
+    "softwrap": true,
+    "wordwrap": true
 }
