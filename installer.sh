@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# Import functions from other shell files
+source flatpaks.sh
+source customize_gnome.sh
+
 CDY="$(echo $PWD)"
 CURRENT_USER="$(echo $USER)"
 
@@ -22,20 +26,20 @@ sudo apt update && sudo apt install nala -y
 sudo nala upgrade -y
 
 # Install VSCodium
-wget -qO - https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg \
-    | gpg --dearmor \
-    | sudo dd of=/usr/share/keyrings/vscodium-archive-keyring.gpg
+# wget -qO - https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg \
+    # | gpg --dearmor \
+    # | sudo dd of=/usr/share/keyrings/vscodium-archive-keyring.gpg
 
-echo 'deb [ signed-by=/usr/share/keyrings/vscodium-archive-keyring.gpg ] https://paulcarroty.gitlab.io/vscodium-deb-rpm-repo/debs vscodium main' \
-    | sudo tee /etc/apt/sources.list.d/vscodium.list
+# echo 'deb [ signed-by=/usr/share/keyrings/vscodium-archive-keyring.gpg ] https://paulcarroty.gitlab.io/vscodium-deb-rpm-repo/debs vscodium main' \
+    # | sudo tee /etc/apt/sources.list.d/vscodium.list
 
-sudo nala update && sudo nala install codium -y
+# sudo nala update && sudo nala install codium -y
 
 # Copy Codium config file
-sudo mkdir /home/$CURRENT_USER/.config/VSCodium
-sudo mkdir /home/$CURRENT_USER/.config/VSCodium/User
-sudo cp $CDY/VSCodium/product.json /home/$CURRENT_USER/.config/VSCodium/
-sudo cp $CDY/VSCodium/User/* /home/$CURRENT_USER/.config/VSCodium/User/
+# sudo mkdir /home/$CURRENT_USER/.config/VSCodium
+# sudo mkdir /home/$CURRENT_USER/.config/VSCodium/User
+# sudo cp $CDY/VSCodium/product.json /home/$CURRENT_USER/.config/VSCodium/
+# sudo cp $CDY/VSCodium/User/* /home/$CURRENT_USER/.config/VSCodium/User/
 
 # Check if flatpak is installed, if not install
 if ! [ -x "$(command -v flatpak)" ]; then
@@ -62,9 +66,9 @@ sudo nala install /home/$CURRENT_USER/Downloads/GH_CLI.deb
 #-------------------------
 # Download YoutubeMusic
 #-------------------------
-RELEASE_VERSION_YTM=$(wget -qO - "https://api.github.com/repos/th-ch/youtube-music/releases/latest" | grep -Po '"tag_name": ?"v\K.*?(?=")')
-wget -O /home/$CURRENT_USER/Downloads/YTM.deb "https://github.com/th-ch/youtube-music/releases/download/v${RELEASE_VERSION_YTM}/youtube-music_${RELEASE_VERSION_YTM}_amd64.deb"
-sudo nala install /home/$CURRENT_USER/Downloads/YTM.deb
+# RELEASE_VERSION_YTM=$(wget -qO - "https://api.github.com/repos/th-ch/youtube-music/releases/latest" | grep -Po '"tag_name": ?"v\K.*?(?=")')
+# wget -O /home/$CURRENT_USER/Downloads/YTM.deb "https://github.com/th-ch/youtube-music/releases/download/v${RELEASE_VERSION_YTM}/youtube-music_${RELEASE_VERSION_YTM}_amd64.deb"
+# sudo nala install /home/$CURRENT_USER/Downloads/YTM.deb
 
 #-------------------------
 # Download Micro editor
@@ -144,26 +148,28 @@ printf "Copy micro config to folder"
 sudo cp $CDY/micro/settings.json /home/$CURRENT_USER/.config/micro/
 sudo cp $CDY/micro/bindings.json /home/$CURRENT_USER/.config/micro/
 
-micro --plugin install lsp
-micro --plugin install filemanager
+# micro --plugin install lsp
+# micro --plugin install filemanager
 
-pip install python-lsp-server[all]
-pip install pylsp-mypy
+# pip install python-lsp-server[all]
+# pip install pylsp-mypy
 
 #-------------------------
 # Update .bashrc
 #-------------------------
 cat $CDY/tobash.conf >> sudo /home/$CURRENT_USER/.bashrc
 
+# Install lite-xl
+RELEASE_VERSION_LITEXL=$(wget -qO - "https://api.github.com/repos/lite-xl/lite-xl/releases/latest" | grep -Po '"tag_name": ?"v\K.*?(?=")')
+wget -O /home/$CURRENT_USER/Downloads/lite-xl.tar.gz "https://github.com/lite-xl/lite-xl/releases/download/v${RELEASE_VERSION_LITEXL}/lite-xl-${RELEASE_VERSION_LITEXL}-addons-linux-x86_64-portable.tar.gz"
+tar -xzf /home/$CURRENT_USER/Downloads/lite-xl.tar.gz
+cp /home/$CURRENT_USER/Downloads/lite-xl/lite-xl /home/$CURRENT_USER/.local/bin
+cp -r /home/$CURRENT_USER/Downloads/lite-xl/data/ /home/$CURRENT_USER/.local/share/lite-xl
+cp $CDY/Lite-xl.desktop /home/$CURRENT_USER/.local/share/applications/
 
-#-------------------------
-# Install Polybar and rofi
-#-------------------------
-# sudo nala install polybar rofi -y
-# 
-# sudo mkdir /home/$CURRENT_USER/.config/polybar
-# sudo cp -r $CDY/polybar/* /home/$CURRENT_USER/.config/polybar/
-# 
-# sudo mkdir /home/$CURRENT_USER/.config/rofi
-# sudo cp -r $CDY/rofi/* /home/$CURRENT_USER/.config/rofi/
+# Run functions
+install_flatpaks()
+
+customize_gnome()
+
 
