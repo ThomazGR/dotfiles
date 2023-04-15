@@ -1,7 +1,7 @@
 {
     "workbench.iconTheme": "vscode-icons",
     "vsicons.dontShowNewVersionMessage": true,
-    "workbench.colorTheme": "Andromeda",
+    "workbench.colorTheme": "Dracula",
     "workbench.startupEditor": "none",
     "telemetry.enableTelemetry": false,
     "telemetry.enableCrashReporter": false,
@@ -14,4 +14,28 @@
     "editor.autoClosingQuotes": "always",
     "editor.autoClosingBrackets": "always",
     "update.enableWindowsBackgroundUpdates": false,
+    "editor.wordWrapColumn": 100,
+    "r.rpath.linux": "/home/thzgr/miniconda/envs/masters/bin/R",
+    "r.rterm.linux": "/home/thzgr/miniconda/envs/masters/bin/R",
+    "r.helpPanel.enableHoverLinks": false,
+    "explorer.confirmDragAndDrop": false,
+    "git.confirmSync": false,
+    "workbench.editorAssociations": {
+        "*.pdf": "latex-workshop-pdf-hook"
+    },
+    "editor.wrappingIndent": "indent",
+    "editor.wordWrap": "on",
+    "html.format.wrapLineLength": 100,
+    "r.lsp.diagnostics": false,
+    "security.workspace.trust.untrustedFiles": "open",
+    "editor.stickyScroll.enabled": true,
+    "window.zoomLevel": 1,
+    "python.experiments.enabled": false,
+    "python.languageServer": "Pylance",
+    "python.linting.flake8Enabled": true,
+    "python.linting.flake8Path": "/usr/bin/flake8",
+    "python.formatting.autopep8Path": "/usr/bin/autopep8",
+    "python.linting.flake8Args": [
+        "--max-line-length=120"
+    ],
 }
