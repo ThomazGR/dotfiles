@@ -1,12 +1,15 @@
 {
     "Alt-/": "lua:comment.comment",
     "Alt-c": "lua:comment.comment",
-    "Alt-d": "DeleteLine",
+    "Alt-d": "DuplicateLine",
+    "Ctrl-d": "DeleteLine",
+    "Ctrl-l": "SelectLine",
+    "Ctrl-g": "command-edit:goto ",
     "Alt-f": "command:format",
     "Alt-k": "command:hover",
     "Alt-r": "command:references",
     "Alt-t": "command:tree",
     "Alt-x": "ShellMode",
-    "CtrlSpace": "command:lspcompletion",
+    "CtrlSpace": "Autocomplete|command:lspcompletion",
     "CtrlUnderscore": "lua:comment.comment"
 }

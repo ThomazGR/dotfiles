@@ -3,6 +3,7 @@
 # Import functions from other shell files
 source flatpaks.sh
 source customize_gnome.sh
+source python_install.sh
 
 CDY="$(echo $PWD)"
 CURRENT_USER="$(echo $USER)"
@@ -121,16 +122,16 @@ fi
 #-------------------------
 # Installing Miniconda
 #-------------------------
-printf "Downloading miniconda installer and installing miniconda for Linux"
-wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O /home/$CURRENT_USER/Downloads/miniconda.sh
-bash /home/$CURRENT_USER/Downloads/miniconda.sh -b -p /home/$CURRENT_USER/miniconda
+# printf "Downloading miniconda installer and installing miniconda for Linux"
+# wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O /home/$CURRENT_USER/Downloads/miniconda.sh
+# bash /home/$CURRENT_USER/Downloads/miniconda.sh -b -p /home/$CURRENT_USER/miniconda
 
-if ! [ -x "$(command -v conda)" ]; then
-	export PATH="$HOME/miniconda/bin:$PATH"
-	/home/$CURRENT_USER/miniconda/bin/conda init
-else
-	/home/$CURRENT_USER/miniconda/bin/conda init
-fi
+# if ! [ -x "$(command -v conda)" ]; then
+	# export PATH="$HOME/miniconda/bin:$PATH"
+	# /home/$CURRENT_USER/miniconda/bin/conda init
+# else
+	# /home/$CURRENT_USER/miniconda/bin/conda init
+# fi
 
 #-------------------------
 # Install prompter
@@ -168,8 +169,8 @@ cp -r /home/$CURRENT_USER/Downloads/lite-xl/data/ /home/$CURRENT_USER/.local/sha
 cp $CDY/Lite-xl.desktop /home/$CURRENT_USER/.local/share/applications/
 
 # Run functions
-install_flatpaks()
+install_flatpaks
 
-customize_gnome()
+customize_gnome
 
-
+python_adds

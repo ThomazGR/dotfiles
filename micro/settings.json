@@ -1,9 +1,10 @@
 {
-    "colorscheme": "monokai-dark",
+    "colorscheme": "monokai-dark-mod",
     "filemanager-openonstart": true,
     "lsp.autocompleteDetails": true,
     "lsp.formatOnSave": false,
     "lsp.server": "python=pylsp,lua=lua-lsp",
+    "mkparents": true,
     "softwrap": true,
     "wordwrap": true
 }
