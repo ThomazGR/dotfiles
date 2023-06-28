@@ -120,20 +120,6 @@ else
 fi
 
 #-------------------------
-# Installing Miniconda
-#-------------------------
-# printf "Downloading miniconda installer and installing miniconda for Linux"
-# wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O /home/$CURRENT_USER/Downloads/miniconda.sh
-# bash /home/$CURRENT_USER/Downloads/miniconda.sh -b -p /home/$CURRENT_USER/miniconda
-
-# if ! [ -x "$(command -v conda)" ]; then
-	# export PATH="$HOME/miniconda/bin:$PATH"
-	# /home/$CURRENT_USER/miniconda/bin/conda init
-# else
-	# /home/$CURRENT_USER/miniconda/bin/conda init
-# fi
-
-#-------------------------
 # Install prompter
 #-------------------------
 # Create the directory inside .config for the shell configs
@@ -149,8 +135,8 @@ printf "Copy micro config to folder"
 sudo cp $CDY/micro/settings.json /home/$CURRENT_USER/.config/micro/
 sudo cp $CDY/micro/bindings.json /home/$CURRENT_USER/.config/micro/
 
-# micro --plugin install lsp
-# micro --plugin install filemanager
+micro --plugin install lsp
+micro --plugin install filemanager
 
 # pip install python-lsp-server[all]
 # pip install pylsp-mypy
@@ -159,14 +145,6 @@ sudo cp $CDY/micro/bindings.json /home/$CURRENT_USER/.config/micro/
 # Update .bashrc
 #-------------------------
 cat $CDY/tobash.conf >> sudo /home/$CURRENT_USER/.bashrc
-
-# Install lite-xl
-RELEASE_VERSION_LITEXL=$(wget -qO - "https://api.github.com/repos/lite-xl/lite-xl/releases/latest" | grep -Po '"tag_name": ?"v\K.*?(?=")')
-wget -O /home/$CURRENT_USER/Downloads/lite-xl.tar.gz "https://github.com/lite-xl/lite-xl/releases/download/v${RELEASE_VERSION_LITEXL}/lite-xl-${RELEASE_VERSION_LITEXL}-addons-linux-x86_64-portable.tar.gz"
-tar -xzf /home/$CURRENT_USER/Downloads/lite-xl.tar.gz
-cp /home/$CURRENT_USER/Downloads/lite-xl/lite-xl /home/$CURRENT_USER/.local/bin
-cp -r /home/$CURRENT_USER/Downloads/lite-xl/data/ /home/$CURRENT_USER/.local/share/lite-xl
-cp $CDY/Lite-xl.desktop /home/$CURRENT_USER/.local/share/applications/
 
 # Run functions
 install_flatpaks
